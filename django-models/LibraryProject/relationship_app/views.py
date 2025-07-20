@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Book, Library
+from .models import Book
+from .models import Library
 from django.views.generic import DetailView
 
 def book_list(request):
@@ -12,6 +13,9 @@ class LibraryDetailView(DetailView):
   """A class-based view for displaying details of a specific Library."""
   model = Library
   template_name = 'relationship_app/list_books.html'
+  template_name = 'relationship_app/library_detail.html'
+  context_object_name = "library"
+
 
   def get_context_data(self, **kwargs):
     """Injects additional context data specific to the Library."""
