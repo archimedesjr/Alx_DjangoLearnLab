@@ -129,15 +129,28 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Prevent browser-based vulnerabilities
 SECURE_BROWSER_XSS_FILTER = True
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 X_FRAME_OPTIONS = "DENY"
 
+# Ensure cookies are only transmitted via HTTPS
 CSRF_COOKIE_SECURE = True
 
 SESSION_COOKIE_SECURE = True
+
+# SECURITY SETTINGS
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True # Protects against man-in-the-middle attacks
+
+# Enforces HTTPS in browsers
+SECURE_HSTS_SECONDS = 31536000
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SECURE_HSTS_PRELOAD = True
 
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
