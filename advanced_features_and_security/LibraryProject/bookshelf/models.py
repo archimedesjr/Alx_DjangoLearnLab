@@ -1,11 +1,12 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
-    publication_year = models.IntegerField()
+    publication_date = models.DateField(default=timezone.now)
 
     class Meta:
         permissions = [

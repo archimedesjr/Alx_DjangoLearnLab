@@ -2,9 +2,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Book, CustomUser
 
+@admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'publication_year')
-    list_filter = ('author', 'publication_year')  
+    list_display = ('title', 'author', 'publication_date')
+    list_filter = ('author', 'publication_date')  
     search_fields = ('title', 'author')
 
 class CustomUserAdmin(UserAdmin):
