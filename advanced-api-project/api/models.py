@@ -8,7 +8,7 @@ class Author(models.Model):
 # Book model: represents a book written by an author
 class Book(models.Model):
     title = models.CharField(max_length=200)
-    published_year = models.IntegerField()
+    publication_year = models.IntegerField()
     author = models.ForeignKey(
         Author, 
         on_delete=models.CASCADE, 
