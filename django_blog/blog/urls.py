@@ -15,18 +15,27 @@ urlpatterns = [
     # Profile page (custom view)
     path('profile/', views.profile, name='profile'),
 
-    # ListView
-    path('/posts/', views.PostListView.as_view(), name='post-list'),
+    # PostListView
+    path('posts/', views.PostListView.as_view(), name='post-list'),
 
-    # CreateView
-    path('/post/new/', views.PostCreateView.as_view(), name='post-create'),
+    # PostCreateView
+    path('post/new/', views.PostCreateView.as_view(), name='post-create'),
 
-    # DetailView
-    path('/posts/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
+    # PostDetailView
+    path('posts/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
 
-    # UpdateView
-    path('/post/<int:pk>/update/', views.PostUpdateView.as_view(), name='post-update'),
+    # PostUpdateView
+    path('post/<int:pk>/update/', views.PostUpdateView.as_view(), name='post-update'),
     
-    # DeleteView
-    path('/post/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post-delete'),
+    # PostDeleteView
+    path('post/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post-delete'),
+
+    # CommentCreateView
+    path('comment/new/', views.CommentCreateView.as_view(), name='comment-created'),
+
+    # CommentUpdateView
+    path('comment/<int:pk>/update/', views.CommentUpdateView.as_view(), name='comment-updated'),
+    
+    # PostDeleteView
+    path('comment/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment-deleted'),
 ]

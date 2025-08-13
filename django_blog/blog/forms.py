@@ -23,4 +23,28 @@ class ProfileUpdateForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'published_date']
+        fields = ['title', 'content']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Write your comment here...',
+                'rows': 3
+            }),
+        }
+
+    def clean_content(self):
+        content = self.cleaned_data.get('content')
+        
+        # Example validation rule — ensure content is at least 5 characters
+        if len(content.strip()) < 5:
+            raise forms.ValidationError("Your comment is too short. Please write at least 5 characters.")
+        
+        return content
+
+
+
