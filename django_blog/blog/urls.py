@@ -19,13 +19,13 @@ urlpatterns = [
     path('/posts/', views.PostListView.as_view(), name='post-list'),
 
     # CreateView
-    path('/posts/new/', views.PostCreateView.as_view(), name='post-create'),
+    path('/post/new/', views.PostCreateView.as_view(), name='post-create'),
 
     # DetailView
     path('/posts/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
 
     # UpdateView
-    path('/posts/<int:pk>/edit/', views.PostUpdateView.as_view(), name='post-update'),
+    path('/post/<int:pk>/update/', views.PostUpdateView.as_view(), name='post-update'),
     
     # DeleteView
     path('/posts/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post-delete'),
