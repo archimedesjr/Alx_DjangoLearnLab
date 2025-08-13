@@ -3,23 +3,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <div class="auth-container">
-        <h2>Register</h2>
+        <h2>Login</h2>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn">Register</button>
+            <button type="submit" class="btn">Login</button>
         </form>
 
         {% for message in messages %}
             <p class="success">{{ message }}</p>
         {% endfor %}
 
-        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        <p>Don't have an account?  <a href="{% url 'register' %}">Register here</a></p>
     </div>
 </body>
 </html>
