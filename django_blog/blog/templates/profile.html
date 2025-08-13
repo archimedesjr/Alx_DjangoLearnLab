@@ -1,18 +1,27 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <div class="profile-container">
-        <h2>Your Profile</h2>
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <a href="{% url 'logout' %}" class="btn">Logout</a>
-        <a href="{% url 'login' %}" class="btn">Login Page</a>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Update Profile</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <p class="success">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            <legend>User Info</legend>
+            {{ user_form.as_p }}
+        </fieldset>
+        <fieldset>
+            <legend>Profile Info</legend>
+            {{ profile_form.as_p }}
+        </fieldset>
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+{% endblock %}
+
