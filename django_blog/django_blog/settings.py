@@ -117,7 +117,7 @@ LOGIN_URL = 'login'
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [BASE_DIR / 'static']  # directory for your CSS, JS, images
+# STATICFILES_DIRS = [BASE_DIR / 'static']  # directory for your CSS, JS, images
 STATIC_ROOT = BASE_DIR / 'staticfiles'    # directory where collectstatic will gather files for production
 
 
@@ -127,7 +127,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # You can put template folders here
+        'DIRS': [],  # You can put template folders here
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
