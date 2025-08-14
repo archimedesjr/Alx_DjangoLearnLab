@@ -46,19 +46,6 @@ def profile(request):
 
     return render(request, 'blog/profile.html', context)
 
-def post_search(request):
-    query = request.GET.get('q')
-    results = Post.objects.all()
-
-    if query:
-        results = results.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(tags__name__icontains=query)
-        ).distinct()
-
-    return render(request, 'blog/post_search.html', {'results': results, 'query': query})
-
 # List all blog post
 class PostListView(ListView):
     model = Post
