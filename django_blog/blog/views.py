@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from .models import Post, Comment
 from django.shortcuts import get_object_or_404, redirect
+from django.db.models import Q
 
 # Registration View
 def register(request):
@@ -45,12 +46,36 @@ def profile(request):
 
     return render(request, 'blog/profile.html', context)
 
+def post_search(request):
+    query = request.GET.get('q')
+    results = Post.objects.all()
+
+    if query:
+        results = results.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
+
+    return render(request, 'blog/post_search.html', {'results': results, 'query': query})
+
 # List all blog post
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
     ordering = ['-published_date']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(tags__name__icontains=query)
+            ).distinct()
+        return queryset
 
 # Retrieve a single blog by ID
 class PostDetailView(DetailView):
