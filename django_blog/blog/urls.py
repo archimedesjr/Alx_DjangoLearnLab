@@ -39,5 +39,5 @@ urlpatterns = [
     # PostDeleteView
     path('comment/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment-deleted'),
 
-    path('search/', views.post_search, name='post-search'),
+    # path('search/', views.post_search, name='post-search'),
 ]

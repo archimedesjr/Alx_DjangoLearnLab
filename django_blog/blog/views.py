@@ -56,6 +56,7 @@ class PostListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         query = self.request.GET.get('q')
+        
         if query:
             queryset = queryset.filter(
                 Q(title__icontains=query) |
