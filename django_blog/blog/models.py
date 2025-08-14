@@ -40,9 +40,9 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
-class Tag(models.Model):
-    name = models.CharField(max_length=200)
-    posts = models.ManyToManyField(Post, related_name='tags')
+# class Tag(models.Model):
+#     name = models.CharField(max_length=200)
+#     posts = models.ManyToManyField(Post, related_name='tags')
 
 @receiver(post_save, sender=User)
 def create_or_update_profile(sender, instance, created, **kwargs):
