@@ -35,8 +35,8 @@ class FeedView(generics.ListAPIView):
         return Post.objects.filter(author__in=following_users).order_by("-created_at")
 
 class LikePostView(LoginRequiredMixin, View):
-    def post(self, request, post_id):
-        post = generics.get_object_or_404(Post, id=post_id)
+    def post(self, request, pk):
+        post = generics.get_object_or_404(Post, pk=pk)
 
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
@@ -54,8 +54,8 @@ class LikePostView(LoginRequiredMixin, View):
             return JsonResponse({"status": "already_liked"})
 
 class UnlikePostView(LoginRequiredMixin, View):
-    def post(self, request, post_id):
-        post = generics.get_object_or_404(Post, id=post_id)
+    def post(self, request, pk):
+        post = generics.get_object_or_404(Post, pk=pk)
         like = Like.objects.filter(user=request.user, post=post).first()
 
         if like:
