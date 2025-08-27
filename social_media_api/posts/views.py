@@ -2,7 +2,6 @@ from rest_framework import generics, viewsets, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django.views import View
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Comment, Post, Like, Notification
 from .serializers import CommentSerializer, PostSerializer
@@ -37,7 +36,7 @@ class FeedView(generics.ListAPIView):
 
 class LikePostView(LoginRequiredMixin, View):
     def post(self, request, post_id):
-        post = get_object_or_404(Post, id=post_id)
+        post = generics.get_object_or_404(Post, id=post_id)
 
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
@@ -56,7 +55,7 @@ class LikePostView(LoginRequiredMixin, View):
 
 class UnlikePostView(LoginRequiredMixin, View):
     def post(self, request, post_id):
-        post = get_object_or_404(Post, id=post_id)
+        post = generics.get_object_or_404(Post, id=post_id)
         like = Like.objects.filter(user=request.user, post=post).first()
 
         if like:
